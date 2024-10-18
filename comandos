@@ -6,3 +6,6 @@ Reativar o ambiente virtual -> source venv/bin/activate
 
 Instalar o django -> pipenv install django
 
+#GIT
+gh repo create django-painel --public --source=. --remote=origin
+
