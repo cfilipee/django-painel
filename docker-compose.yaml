@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15.8-alpine3.20
+    container_name: postgres_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 8143 # Altere para a sua senha
+      POSTGRES_DB: mydb # Altere para o nome do seu banco de dados
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+
+  pgadmin:
+    image: dpage/pgadmin4:8.11.0
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: caiofilipee@gmail.com # Altere para o seu e-mail de administrador
+      PGADMIN_DEFAULT_PASSWORD: 8143 # Altere para a sua senha de administrador
+    depends_on:
+      - postgres
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge
